@@ -1,5 +1,5 @@
 /* cksum -- calculate and print POSIX checksums and sizes of files
-   Copyright (C) 1992-2020 Free Software Foundation, Inc.
+   Copyright (C) 1992-2019 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -107,7 +107,7 @@ main (void)
 # include "error.h"
 
 /* Number of bytes to read at once.  */
-# define BUFLEN (1 << 16)
+# define BUFLEN (1 << 12)    /* was (1 << 16), but seems to big for WASI's stack */
 
 static uint_fast32_t const crctab[256] =
 {

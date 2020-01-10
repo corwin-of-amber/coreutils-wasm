@@ -1,0 +1,7 @@
+./bootstrap
+./configure
+make
+# (or: echo 'gen: $(BUILT_SOURCES)' >> Makefile && make gen)
+cp wasi-preconf/*.h lib/
+ln -s <location-of-wasi-kernel-include> wasi
+make -f Makefile.wasi

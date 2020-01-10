@@ -4,12 +4,17 @@
 *.gcda
 *.gcno
 *.o
+*.wo
+*.wa
+*.wasm
+*.wat
 */.deps/
 *~
 ._bootmp
 .gdb-history
 .kludge-stamp
 .version
+/wasi
 /ABOUT-NLS
 /ChangeLog
 /GNUmakefile

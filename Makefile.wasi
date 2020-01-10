@@ -1,0 +1,52 @@
+CC = /opt/wasi-sdk/bin/clang
+INC = -I. -Ilib  -Isrc -Iwasi -include wasi/etc.h
+CFLAGS = $(INC) -O3 -Wno-tautological-constant-out-of-range-compare
+# -fblocks 
+LDFLAGS = -Wl,-allow-undefined
+
+AR = /opt/wasi-sdk/bin/llvm-ar
+
+PROGS = ls touch basename chmod chown cksum cat cut env mkdir
+
+libcoreutils.a_OBJ = ${addprefix lib/, ${filter %.o, ${shell ar t lib/libcoreutils.a}}}
+libcoreutils.wa_OBJ = $(libcoreutils.wa_SRC:.c=.wo)
+
+all: ${foreach p, $(PROGS), bin/$(p).wasm}
+
+%.wo: %.c
+	$(CC) $(CFLAGS) -c $^ -o $@
+
+
+gnulib_SRC = getprogname.c argmatch.c obstack.c areadlink-with-size.c c-strcasecmp.c c-strncasecmp.c canonicalize.c quotearg.c xstrtoumax.c xstrtol-error.c xmalloc.c xgethostname.c xgetcwd.c xalloc-die.c version-etc.c version-etc-fsf.c umaxtostr.c time_rz.c hash-triple.c progname.c file-set.c same.c wcwidth.c uniwidth/width.c timegm.c stat.c readlink.c getopt.c nl_langinfo.c mktime.c lstat.c getopt1.c getcwd.c openat.c cloexec.c fstatat.c fnmatch.c fflush.c fpurge.c calloc.c nstrftime.c mpsort.c mbswidth.c wcswidth.c localcharset.c basename-lgpl.c imaxtostr.c human.c hash.c hash-pjw.c hard-locale.c idcache.c gettime.c filevercmp.c filemode.c filenamecat.c filenamecat-lgpl.c file-has-acl.c exitfail.c error.c vfprintf.c vasnprintf.c isnanl.c printf-parse.c printf-frexpl.c printf-frexp.c printf-args.c dirname.c dirname-lgpl.c closeout.c close-stream.c fclose.c acl-internal.c acl_entries.c acl-errno-valid.c fdutimensat.c parse-datetime.c posixver.c posixtm.c utimens.c futimens.c open.c utimensat.c save-cwd.c chdir-long.c memrchr.c open-safer.c fd-safer.c dup-safer.c openat-proc.c openat-die.c putenv.c sig2str.c getndelim2.c xstrndup.c memchr2.c long-options.c ftello.c modechange.c savewd.c mkdir-p.c mkancesdirs.c dirchownmod.c chown.c lchown.c safe-read.c full-write.c safe-write.c
+
+gl_SRC = fadvise.c fd-reopen.c mbsalign.c xdectoumax.c 
+
+libcoreutils.wa_SRC = ${addprefix lib/, $(gnulib_SRC)} \
+	${addprefix gl/lib/, $(gl_SRC)} \
+    ${addprefix src/, version.c operand2sig.c set-fields.c prog-fprintf.c}
+
+lib/libcoreutils.wa: $(libcoreutils.wa_OBJ)
+	$(AR) cr $@ $^
+
+
+ls_SRC = src/ls.c src/ls-ls.c 
+touch_SRC = src/touch.c
+basename_SRC = src/basename.c
+chmod_SRC = src/chmod.c
+chown_SRC = src/chown.c
+cksum_SRC = src/cksum.c
+cat_SRC = src/cat.c
+cut_SRC = src/cut.c
+env_SRC = src/env.c
+mkdir_SRC = src/mkdir.c
+
+force:
+
+bin/%.wasm: $($*_SRC) lib/libcoreutils.wa force
+	@mkdir -p bin
+	$(CC) $(CFLAGS) -o $@ $($*_SRC) lib/libcoreutils.wa $(LDFLAGS)
+
+.PHONY: clean
+
+clean:
+	rm -f src/*.wo lib/*.wo lib/*.wa
