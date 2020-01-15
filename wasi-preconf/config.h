@@ -1976,30 +1976,33 @@
 /* Define to 1 if you have the `pstat_getstatic' function. */
 /* #undef HAVE_PSTAT_GETSTATIC */
 
+/* Define if you have the <pthread.h> header and the POSIX threads API. */
+//#define HAVE_PTHREAD_API 1
+
 /* Define to 1 if you have the `pthread_atfork' function. */
-#define HAVE_PTHREAD_ATFORK 1
+//#define HAVE_PTHREAD_ATFORK 1
 
 /* Define to 1 if you have the <pthread.h> header file. */
-#define HAVE_PTHREAD_H 1
+//#define HAVE_PTHREAD_H 1
 
 /* Define if the <pthread.h> defines PTHREAD_MUTEX_RECURSIVE. */
-#define HAVE_PTHREAD_MUTEX_RECURSIVE 1
+//#define HAVE_PTHREAD_MUTEX_RECURSIVE 1
 
 /* Define if the POSIX multithreading library has read/write locks. */
-#define HAVE_PTHREAD_RWLOCK 1
+//#define HAVE_PTHREAD_RWLOCK 1
 
 /* Define if the 'pthread_rwlock_rdlock' function prefers a writer to a
    reader. */
-#define HAVE_PTHREAD_RWLOCK_RDLOCK_PREFER_WRITER 1
+//#define HAVE_PTHREAD_RWLOCK_RDLOCK_PREFER_WRITER 1
 
 /* Define to 1 if the pthread_sigmask function can be used (despite bugs). */
-#define HAVE_PTHREAD_SIGMASK 1
+//#define HAVE_PTHREAD_SIGMASK 1
 
 /* Define to 1 if the system has the type `pthread_spinlock_t'. */
 /* #undef HAVE_PTHREAD_SPINLOCK_T */
 
 /* Define to 1 if the system has the type `pthread_t'. */
-#define HAVE_PTHREAD_T 1
+//#define HAVE_PTHREAD_T 1
 
 /* Define to 1 if you have the <pwd.h> header file. */
 #define HAVE_PWD_H 1
@@ -2730,7 +2733,7 @@
 /* #undef HAVE___FREADPTR */
 
 /* Define to 1 if you have the `__freadptrinc' function. */
-/* #undef HAVE___FREADPTRINC */
+#define HAVE___FREADPTRINC 1
 
 /* Define to 1 if you have the `__fseterr' function. */
 #define HAVE___FSETERR 1
@@ -3072,6 +3075,12 @@
 /* Define if vprintf is overridden by a POSIX compliant gnulib implementation.
    */
 #define REPLACE_VPRINTF_POSIX 1
+
+/* Define to 1 if setlocale (LC_ALL, NULL) is multithread-safe. */
+#define SETLOCALE_NULL_ALL_MTSAFE 1
+
+/* Define to 1 if setlocale (category, NULL) is multithread-safe. */
+#define SETLOCALE_NULL_ONE_MTSAFE 1
 
 /* Define to l, ll, u, ul, ull, etc., as suitable for constants of type
    'sig_atomic_t'. */
