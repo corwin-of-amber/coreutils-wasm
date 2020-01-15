@@ -79,6 +79,8 @@ BUILT_SOURCES = .version
 .version:
 	$(AM_V_GEN)echo $(VERSION) > $@-t && mv $@-t $@
 
+gen: $(BUILT_SOURCES)
+	
 # Have no read-only files in the tarball to allow easy removal.
 # Have .tarball-version based versions only in tarball builds.
 # Have .timestamp based dates only in tarball builds.

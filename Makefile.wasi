@@ -13,6 +13,9 @@ libcoreutils.wa_OBJ = $(libcoreutils.wa_SRC:.c=.wo)
 
 all: ${foreach p, $(PROGS), bin/$(p).wasm}
 
+reconfigure:
+	cp wasi-preconf/*.h lib/
+
 %.wo: %.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
