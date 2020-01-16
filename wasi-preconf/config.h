@@ -987,10 +987,10 @@
 /* #undef HAVE_CHSIZE */
 
 /* Define to 1 if you have the `clock_gettime' function. */
-#define HAVE_CLOCK_GETTIME 1
+//#define HAVE_CLOCK_GETTIME 1
 
 /* Define to 1 if you have the `clock_settime' function. */
-#define HAVE_CLOCK_SETTIME 1
+//#define HAVE_CLOCK_SETTIME 1
 
 /* Define to 1 if you have the `closedir' function. */
 #define HAVE_CLOSEDIR 1
@@ -1412,7 +1412,7 @@
 /* #undef HAVE_EXPLICIT_MEMSET */
 
 /* Define to 1 if you have the `faccessat' function. */
-#define HAVE_FACCESSAT 1
+//#define HAVE_FACCESSAT 1
 
 /* Define to 1 if you have the `facl' function. */
 /* #undef HAVE_FACL */
