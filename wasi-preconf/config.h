@@ -2725,7 +2725,6 @@
 /* #undef HAVE___FREADAHEAD */
 
 /* Define to 1 if you have the `__freading' function. */
-#define HAVE___FREADING 1
 /* #undef HAVE___FREADING */
 
 /* Define to 1 if you have the `__freadptr' function. */
